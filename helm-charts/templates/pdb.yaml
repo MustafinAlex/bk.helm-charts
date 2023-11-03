@@ -1,0 +1,12 @@
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "helm-release.fullname" . }}
+  labels:
+    {{- include "helm-release.labels" . | nindent 4 }}
+spec:
+  minAvailable: 100%
+  selector:
+    matchLabels:
+      app: {{ include "helm-release.fullname" . }}

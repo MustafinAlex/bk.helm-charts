@@ -1,0 +1,17 @@
+{{- if .Values.autoscalingPolicy }}
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "helm-release.fullname" . }}
+  labels:
+    name: {{ include "helm-release.fullname" . }}
+    {{- include "helm-release.labels" . | nindent 4 }}
+spec:
+  maxReplicas: {{ .Values.autoscalingPolicy.maxReplicas}}
+  minReplicas: {{ .Values.autoscalingPolicy.minReplicas}}
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "helm-release.fullname" . }}   
+  targetCPUUtilizationPercentage: {{ .Values.autoscalingPolicy.targetCpuUtilization}}
+  {{- end -}}
