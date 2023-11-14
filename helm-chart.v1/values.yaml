@@ -5,7 +5,7 @@
 minReplicas: 1
 
 image:
-  repository: nginx
+  repository: busybox
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
