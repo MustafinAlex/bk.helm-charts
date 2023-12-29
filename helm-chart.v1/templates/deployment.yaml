@@ -45,6 +45,7 @@ spec:
           {{- end }}
           ports:
             - containerPort: 80
+              name: http
               protocol: TCP
           livenessProbe:
             {{ .Values.serviceHealth.livenessProbe | toYaml | indent 12 | trim }}
