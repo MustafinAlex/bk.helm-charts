@@ -44,9 +44,7 @@ spec:
                 name: {{ .Release.Name }}
           {{- end }}
           ports:
-            - containerPort: 8080
-              protocol: TCP
-            - containerPort: 8081
+            - containerPort: 80
               protocol: TCP
           livenessProbe:
             {{ .Values.serviceHealth.livenessProbe | toYaml | indent 12 | trim }}
