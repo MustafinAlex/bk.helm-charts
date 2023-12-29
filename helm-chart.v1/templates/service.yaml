@@ -1,15 +1,32 @@
+# (c) 2020 EPAM systems, Inc. All Right Reserved. All information contained herein is, and remains the
+# property of EPAM Systems, Inc. and/or its suppliers and is protected by international intellectual
+# property law. Dissemination of this information or reproduction of this material is strictly forbidden,
+# unless prior written permission is obtained from EPAM Systems, Inc.
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "helm-release.fullname" . }}
+  name: {{ .Values.name }}
+ {{- if .Values.service.annotations }}
+  annotations:
+  {{- with .Values.service.annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+ {{- end }}
   labels:
-    {{- include "helm-release.labels" . | nindent 4 }}
+{{- include "helm-release.labels" . | nindent 4 }}  
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+  - port: {{ .Values.service.port }}
+    targetPort: http
+    protocol: TCP
+    name: {{ .Values.service.name }}
+  sessionAffinity: None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
   selector:
-    {{- include "helm-release.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ .Values.name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

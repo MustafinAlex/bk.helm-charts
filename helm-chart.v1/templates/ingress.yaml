@@ -12,15 +12,15 @@ metadata:
   labels:
 {{- include "helm-release.labels" . | nindent 4 }}    
 spec:
-  ingressClassName: kong-internal 
+  ingressClassName: kong-internal
   rules:
-  - host:  mdtu-gpt-dev-internal.westeurope.cloudapp.azure.com
+  - host:  {{ .Values.hosting.domain }} 
     http:
       paths:
-      - path: /nginx
+      - path: {{ .Values.env.SUFFIX }}
         pathType: Prefix
         backend:
           service:
-            name: {{ include "helm-release.fullname" . }}
+            name: {{ .Values.name }}
             port:
-              number: 80
+              number: 8080

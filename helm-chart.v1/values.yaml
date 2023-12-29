@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 minReplicas: 1
+name: nginx
 
 image:
   repository: busybox
@@ -40,7 +41,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 resources: {}
   # limits:
