@@ -16,7 +16,7 @@ metadata:
 spec:
   ingressClassName: kong-internal 
   rules:
-  - host:  www
+  - host:  mdtu-gpt-dev-internal.westeurope.cloudapp.azure.com
     http:
       paths:
       - path: /
