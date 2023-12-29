@@ -28,4 +28,4 @@ spec:
     - IPv4
   ipFamilyPolicy: SingleStack
   selector:
-    {{- include "helm-release.labels" . | nindent 4 }}
+    app.kubernetes.io/instance: bop-customer-api
