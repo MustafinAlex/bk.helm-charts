@@ -28,5 +28,4 @@ spec:
     - IPv4
   ipFamilyPolicy: SingleStack
   selector:
-    app.kubernetes.io/name: {{ .Values.name }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "helm-release.labels" . | nindent 4 }}
