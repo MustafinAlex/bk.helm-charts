@@ -7,8 +7,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    konghq.com/https-redirect-status-code: '308'
-    konghq.com/protocols: https
     konghq.com/strip-path: 'true'
   name: {{ include "helm-release.fullname" . }}
   labels:
@@ -19,7 +17,7 @@ spec:
   - host:  mdtu-gpt-dev-internal.westeurope.cloudapp.azure.com
     http:
       paths:
-      - path: /
+      - path: /nginx
         pathType: Prefix
         backend:
           service:
